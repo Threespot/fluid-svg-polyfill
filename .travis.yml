@@ -1,0 +1,10 @@
+clanguage: node_js
+language: node_js
+install:
+- yarn install
+node_js:
+- "9"
+- "8"
+- "7"
+- "6"
+script: yarn test:prod
