@@ -20,7 +20,7 @@ $ yarn add @threespot/fluid-svg-polyfill
 ## Usage
 
 ```js
-import fluidSVGPolyfill from "../lib/ie-svg-fix";
+import fluidSVGPolyfill from "@threespot/fluid-svg-polyfill";
 
 // Add “is-fluid” class to any SVGs that are fluid width
 const svgs = document.querySelectorAll('.is-fluid');
@@ -31,7 +31,7 @@ svgs.forEach( el => fluidSVGPolyfill(el) );
 You can also specify a custom class to add to the wrapper `<div>`:
 
 ```js
-fluidSVGPolyfill(svgEl, { wrapperClass: "custom-class" });
+fluidSVGPolyfill(el, { wrapperClass: "custom-class" });
 ```
 
 ## License
