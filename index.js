@@ -72,7 +72,8 @@ export default function(el, opts) {
     wrapper.className = options.wrapperClass;
   }
 
-  wrapper.style = `padding-top: ${round(aspectRatioPadding, 3)}%; position: relative;`;
+  wrapper.style.paddingTop = round(aspectRatioPadding, 3) + "%";
+  wrapper.style.position = "relative";
 
   // Wrap SVG with the div
   el.parentNode.insertBefore(wrapper, el);
