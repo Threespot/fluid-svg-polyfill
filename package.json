@@ -70,7 +70,9 @@
     "webpack-cli": "^2.0.10",
     "webpack-merge": "^4.1.1"
   },
-  "dependencies": {},
+  "dependencies": {
+    "mdn-polyfills": "5.x"
+  },
   "directories": {
     "doc": "docs",
     "test": "test"

@@ -1,3 +1,7 @@
+// Object.assign polyfill for IE 11- support
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign#Browser_compatibility
+import 'mdn-polyfills/Object.assign';
+
 "use strict";
 
 // Check if the browser requires this polyfill (IE 11-)
