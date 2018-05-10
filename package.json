@@ -1,6 +1,6 @@
 {
   "name": "@threespot/fluid-svg-polyfill",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Fluid SVG polyfill",
   "main": "dist/fluid-svg-polyfill.m.js",
   "homepage": "https://threespot.github.io/fluid-svg-polyfill/",
