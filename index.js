@@ -44,7 +44,9 @@ export default function(el, opts) {
   const options = Object.assign(
     {},
     {
-      wrapperClass: false // custom class(es) to add to the wrapper
+      moveClasses: false, // move classes from SVG to wrapper
+      svgClass: false, // optional class string added to SVG
+      wrapperClass: false // optional class string added to wrapper
     },
     opts
   );
@@ -71,6 +73,19 @@ export default function(el, opts) {
   // Wrap SVG in div
   var wrapper = document.createElement("div");
 
+  // Move SVG classes to wrapper
+  if (options.moveClasses) {
+    wrapper.className = el.getAttribute("class");
+    // Remove classes from SVG
+    el.removeAttribute("class");
+  }
+
+  // Add custom SVG class
+  // Note: If we want to drop IE 9 support, we could use classList.add() instead
+  if (options.svgClass) {
+    el.className.baseVal += (el.className.baseVal.length ? " " : "") + options.svgClass;
+  }
+
   // Add custom wrapper class
   if (options.wrapperClass) {
     wrapper.className = options.wrapperClass;
@@ -78,6 +93,7 @@ export default function(el, opts) {
 
   wrapper.style.paddingTop = round(aspectRatioPadding, 3) + "%";
   wrapper.style.position = "relative";
+  wrapper.style.width = "100%";
 
   // Wrap SVG with the div
   el.parentNode.insertBefore(wrapper, el);

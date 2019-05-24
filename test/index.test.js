@@ -22,7 +22,7 @@ test('Basic usage', () => {
   fluidSVGPolyfill(svgEl);
 
   expect(minify(document.body.innerHTML)).toBe(minify(`
-    <div style="padding-top: 23.49%; position: relative;"><svg viewBox="0 0 596 140" preserveAspectRatio="xMidYMid meet" focusable="false" class="is-fluid" width="200" height="47" role="presentation" aria-hidden="true" style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;"><path d="M1"></path></svg></div>`
+    <div style="padding-top: 23.49%; position: relative; width: 100%;"><svg viewBox="0 0 596 140" preserveAspectRatio="xMidYMid meet" focusable="false" class="is-fluid" width="200" height="47" role="presentation" aria-hidden="true" style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;"><path d="M1"></path></svg></div>`
   ));
 });
 
@@ -38,10 +38,59 @@ test('Custom class', () => {
   fluidSVGPolyfill(svgEl, { wrapperClass: "custom-class" });
 
   expect(minify(document.body.innerHTML)).toBe(minify(`
-    <div class="custom-class" style="padding-top: 23.49%; position: relative;"><svg viewBox="0 0 596 140" preserveAspectRatio="xMidYMid meet" focusable="false" class="is-fluid" width="200" height="47" role="presentation" aria-hidden="true" style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;"><path d="M1"></path></svg></div>`
+    <div class="custom-class" style="padding-top: 23.49%; position: relative; width: 100%;"><svg viewBox="0 0 596 140" preserveAspectRatio="xMidYMid meet" focusable="false" class="is-fluid" width="200" height="47" role="presentation" aria-hidden="true" style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;"><path d="M1"></path></svg></div>`
   ));
 });
 
+test('Custom SVG class', () => {
+  const fluidSVGPolyfill = require("../index");
+
+  // Add demo SVG
+  document.body.innerHTML = svg;
+
+  const svgEl = document.querySelector('.is-fluid');
+
+  fluidSVGPolyfill(svgEl, {
+    svgClass: "is-wrapped"
+  });
+
+  expect(minify(document.body.innerHTML)).toBe(minify(`
+    <div style="padding-top: 23.49%; position: relative; width: 100%;"><svg viewBox="0 0 596 140" preserveAspectRatio="xMidYMid meet" focusable="false" class="is-fluid is-wrapped" width="200" height="47" role="presentation" aria-hidden="true" style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;"><path d="M1"></path></svg></div>`
+  ));
+});
+
+test('Move classes', () => {
+  const fluidSVGPolyfill = require("../index");
+
+  // Add demo SVG
+  document.body.innerHTML = svg;
+
+  const svgEl = document.querySelector('.is-fluid');
+
+  fluidSVGPolyfill(svgEl, { moveClasses: true });
+
+  expect(minify(document.body.innerHTML)).toBe(minify(`
+    <div class="is-fluid" style="padding-top: 23.49%; position: relative; width: 100%;"><svg viewBox="0 0 596 140" preserveAspectRatio="xMidYMid meet" focusable="false" width="200" height="47" role="presentation" aria-hidden="true" style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;"><path d="M1"></path></svg></div>`
+  ));
+});
+
+test('Move classes, custom SVG class', () => {
+  const fluidSVGPolyfill = require("../index");
+
+  // Add demo SVG
+  document.body.innerHTML = svg;
+
+  const svgEl = document.querySelector('.is-fluid');
+
+  fluidSVGPolyfill(svgEl, {
+    moveClasses: true,
+    svgClass: "is-wrapped"
+  });
+
+  expect(minify(document.body.innerHTML)).toBe(minify(`
+    <div class="is-fluid" style="padding-top: 23.49%; position: relative; width: 100%;"><svg viewBox="0 0 596 140" preserveAspectRatio="xMidYMid meet" focusable="false" width="200" height="47" role="presentation" aria-hidden="true" class="is-wrapped" style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;"><path d="M1"></path></svg></div>`
+  ));
+});
 
 test('No viewBox', () => {
   const fluidSVGPolyfill = require("../index");
@@ -54,7 +103,7 @@ test('No viewBox', () => {
   fluidSVGPolyfill(svgEl);
 
   expect(minify(document.body.innerHTML)).toBe(minify(`
-    <div style="padding-top: 117.56%; position: relative;"><svg focusable="false" width="302" height="355.03" class="is-fluid" xmlns:xlink="http://www.w3.org/1999/xlink" style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;"><use xlink:href="sprite.svg#icon"></use></svg></div>`
+    <div style="padding-top: 117.56%; position: relative; width: 100%;"><svg focusable="false" width="302" height="355.03" class="is-fluid" xmlns:xlink="http://www.w3.org/1999/xlink" style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;"><use xlink:href="sprite.svg#icon"></use></svg></div>`
   ));
 });
 
